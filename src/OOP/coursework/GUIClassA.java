@@ -1,5 +1,7 @@
 package OOP.coursework;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -42,6 +44,28 @@ public class GUIClassA extends JFrame {
             Object[] rowData = {product.getProductID(), product.getProductName(), product.getPrice(), product.getAvailableItemCount()};
             tableModel.addRow(rowData);
         }
+        JLabel rowLabel = new JLabel("Output will be displayed here.");
+
+        p2.add(rowLabel,BorderLayout.SOUTH);
+
+        jtableProduct.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = jtableProduct.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // Get data from the selected row
+                        Object firstName = jtableProduct.getValueAt(selectedRow, 0);
+                        Object lastName = jtableProduct.getValueAt(selectedRow, 1);
+                        Object age = jtableProduct.getValueAt(selectedRow, 2);
+
+                        // Display output on the JLabel
+                        String output = "Selected Row: " + selectedRow + ", Data: " + firstName + " " + lastName + ", Age: " + age;
+                        rowLabel.setText(output);
+                    }
+                }
+            }
+        });
 
         add(p2);
 
