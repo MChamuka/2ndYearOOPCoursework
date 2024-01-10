@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class ConsoleApplication {
     private static final ShoppingManager manager=new WestminsterShoppingManager();
+
     public static void main(String[] args) {
         while (true) {
             while (true) {
@@ -136,7 +137,7 @@ public class ConsoleApplication {
                         break;
                     case 2:
                         System.out.print("Enter the size of " + productName + ": ");
-                        int size = scanner.nextInt();
+                        String size = scanner.nextLine();
                         scanner.nextLine();
 
                         System.out.print("Enter the colour of " + productName + ": ");

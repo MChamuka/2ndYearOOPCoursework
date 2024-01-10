@@ -3,18 +3,20 @@ package OOP.coursework;
 import java.awt.*;
 
 public class Clothing extends Product{
-    private int size;
+    private String size;
     private String color;
 
-    public Clothing(String productID, String productName, int availableItemCount, double price, int size, String color) {
+    public Clothing(String productID, String productName, int availableItemCount, double price, String size, String color) {
         super(productID, productName, availableItemCount, price);
         this.size = size;
         this.color = color;
     }
-    public int getSize() {
+
+
+    public String getSize() {
         return size;
     }
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
     public String getColor() {

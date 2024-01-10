@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cf1d13a-67ae-4c43-83dd-be7e1ab8c8a5" name="Changes" comment="git add .">
+      <change afterPath="$PROJECT_DIR$/src/UI/OOP/coursework/ComboBoxExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OOP/coursework/Clothing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OOP/coursework/Clothing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OOP/coursework/ConsoleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OOP/coursework/ConsoleApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OOP/coursework/GUIClassA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OOP/coursework/GUIClassA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/OOP/coursework/TableRowClickListenerExample.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +30,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Z23DVnEybd8WLADaIrmPgtSH0l" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -93,7 +101,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>25</line>
+          <line>23</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="deleteProduct">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -102,7 +110,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>36</line>
+          <line>34</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="listOfProducts">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -111,7 +119,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>63</line>
+          <line>60</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="calculateTotalCost">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -120,7 +128,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>72</line>
+          <line>69</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="saveInFile">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -129,7 +137,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>83</line>
+          <line>80</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="readFile">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -138,7 +146,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>93</line>
+          <line>90</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="changeItemCount">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -147,7 +155,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/OOP/coursework/WestminsterShoppingManager.java</url>
-          <line>11</line>
+          <line>9</line>
           <properties class="OOP.coursework.WestminsterShoppingManager" method="addProduct">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

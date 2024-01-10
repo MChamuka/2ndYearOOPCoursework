@@ -2,12 +2,10 @@ package OOP.coursework;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class WestminsterShoppingManager implements ShoppingManager {
     public static final int MAX_PRODUCTS = 50;
     private int freeSlots=MAX_PRODUCTS;
-    private ArrayList<Product> productList =new ArrayList<>();
-
+    public ArrayList<Product> productList =new ArrayList<>();
     @Override
     public void addProduct(Product product) {
         if(productList.contains(product)){
@@ -59,7 +57,6 @@ public class WestminsterShoppingManager implements ShoppingManager {
             System.out.println(product);
         }
     }
-
     @Override
     public void calculateTotalCost() {
         double total = 0;
