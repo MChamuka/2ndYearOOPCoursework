@@ -1,6 +1,8 @@
 package OOP.coursework;
 
-public abstract class Product{
+import java.io.Serializable;
+
+public abstract class Product implements Serializable {
     private String productID;
     private String productName;
     private int  availableItemCount;

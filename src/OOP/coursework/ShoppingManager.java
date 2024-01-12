@@ -1,11 +1,15 @@
 package OOP.coursework;
 
+import java.io.IOException;
+
 public interface ShoppingManager {
- public abstract void addProduct(Product product);
- public abstract void deleteProduct(String productID);
- public abstract void listOfProducts();
- public abstract void calculateTotalCost();
- public abstract void saveInFile();
- public abstract void readFile();
- public abstract void changeItemCount();
+ void addProduct(Product product);
+ void deleteProduct(String productID);
+ void listOfProducts();
+ void calculateTotalCost();
+ void saveInFile(String storedFile) throws IOException;
+ void readFile(String filename) throws IOException,ClassNotFoundException;
+
+ void changeItemCount();
+
 }

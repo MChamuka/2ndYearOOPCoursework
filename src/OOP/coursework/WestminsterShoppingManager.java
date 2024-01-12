@@ -2,7 +2,7 @@ package OOP.coursework;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class WestminsterShoppingManager implements ShoppingManager {
+public class WestminsterShoppingManager implements ShoppingManager{
     public static final int MAX_PRODUCTS = 50;
     private int freeSlots=MAX_PRODUCTS;
     public ArrayList<Product> productList =new ArrayList<>();
@@ -65,27 +65,44 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
         System.out.println("Total cost of all products are : " + total);
     }
-
     @Override
-    public void saveInFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\HP\\Desktop\\productData.txt"))) {
-            writer.write(String.valueOf(productList));
+    public void saveInFile(String storedFile) throws IOException {
 
-            System.out.println("Data has been successfully written to the file.");
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileOutputStream fileOutputStream = new FileOutputStream(storedFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+        for (Product product : productList) {
+
+            objectOutputStream.writeObject(product);
+
         }
-    }
+        fileOutputStream.flush();
+        fileOutputStream.close();
+        objectOutputStream.close();
 
+        System.out.println("Product data are stored successfully");
+    }
     @Override
-    public void readFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\HP\\Desktop\\productData.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+    public void readFile(String filename) throws IOException,ClassNotFoundException {
+
+        FileInputStream fileInputStream = new FileInputStream(filename);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        while (true) {
+            try {
+                Product product = (Product) objectInputStream.readObject();
+                productList.add(product);
+
+            } catch (EOFException e) {
+                break;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Successfully updated");
+        }
+        try {
+            fileInputStream.close();
+            objectInputStream.close();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
     public void changeItemCount(){
@@ -103,8 +120,5 @@ public class WestminsterShoppingManager implements ShoppingManager {
             }
         }
         System.out.println("Invalid product ID");
-    }
-    public ArrayList<Product> getProductList() {
-        return productList;
     }
 }

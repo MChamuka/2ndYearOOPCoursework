@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 public class GUIClassA extends JFrame {
-
     private static final ShoppingManager manager=new WestminsterShoppingManager();
+    public String selectedProductID;
     int comboBoxOption=1;
+    private ShoppingCart shoppingCart=new ShoppingCart();
     public GUIClassA(WestminsterShoppingManager productDetails) {
         setTitle("Westminster Shopping Centre");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,8 +38,10 @@ public class GUIClassA extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // When the button is clicked, open the AnotherGUI
-                GUIClassB anotherGUI = new GUIClassB((WestminsterShoppingManager) manager);
-                anotherGUI.setVisible(true);
+                GUIClassB anotherGUI = new GUIClassB(shoppingCart);
+                anotherGUI.displayTableRows(anotherGUI.tableModelB,shoppingCart);
+
+                UserGUIClass userGUIClass = new UserGUIClass(shoppingCart);
             }
         });
 
@@ -55,10 +58,8 @@ public class GUIClassA extends JFrame {
 
         p1.add(scrollPane, BorderLayout.SOUTH);
 
-        JButton addToCart = new JButton("Shopping Cart");
+        JButton addToCart = new JButton("Add to Shopping Cart");
         p3.add(addToCart,BorderLayout.SOUTH);
-
-
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -71,13 +72,20 @@ public class GUIClassA extends JFrame {
 
         p3.add(rowLabel, BorderLayout.NORTH);
 
-        selectedRowData(jtableProduct,rowLabel,productDetails.productList);
+        selectedRowData(jtableProduct,rowLabel,productDetails.productList,addToCart);
+
+        addToCart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // When the button is clicked, open the AnotherGUI
+
+               shoppingCart.addProduct(productDetails.productList,selectedProductID);
+            }
+        });
 
         add(p2);
         setVisible(true);
     }
-
-
     private void displayTableRows(DefaultTableModel tableModel, ArrayList<Product> productList,int comboBoxOption) {
         for (Product product: productList) {
             if ((product instanceof  Clothing clothing) && (comboBoxOption==1 || comboBoxOption==3) ) {
@@ -89,10 +97,11 @@ public class GUIClassA extends JFrame {
             }
         }
     }
-    private void selectedRowData(JTable jtableProduct,JLabel rowLabel,ArrayList<Product> productList){
+    private void selectedRowData(JTable jtableProduct,JLabel rowLabel,ArrayList<Product> productList,JButton addToCart){
         jtableProduct.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = jtableProduct.getSelectedRow();
                     if (selectedRow != -1) {
@@ -102,6 +111,11 @@ public class GUIClassA extends JFrame {
                         String output="label output";
                         for(Product product:productList){
                             if (selectedRowProductID==product.getProductID()){
+                                selectedProductID = selectedRowProductID.toString();
+
+
+                                System.out.println(selectedProductID);
+
                                 if(product instanceof  Clothing clothing){
                                     output = "Selected Product - Details \n"
                                             + "Product id : " + clothing.getProductID() + "\n"
@@ -128,6 +142,7 @@ public class GUIClassA extends JFrame {
                         rowLabel.setText(output);
                     }
                 }
+
             }
         });
     }

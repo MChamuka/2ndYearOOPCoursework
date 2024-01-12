@@ -1,5 +1,5 @@
 package OOP.coursework;
-import java.awt.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -9,6 +9,7 @@ public class ConsoleApplication {
     public static void main(String[] args) {
         while (true) {
             while (true) {
+                try{
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Are you a User or a manager? \n 1.User \n 2.manager \n Enter the number: ");
                 int operatorType = scanner.nextInt();
@@ -28,6 +29,9 @@ public class ConsoleApplication {
                     continue;
                 }
                 break;
+            }catch (Exception e){
+                    System.out.println("Invalid input, try again");
+                }
             }
 
             int option = 4;
@@ -51,10 +55,10 @@ public class ConsoleApplication {
                             manager.calculateTotalCost();
                             break;
                         case 5:
-                            manager.saveInFile();
+                            manager.saveInFile("C:\\Users\\HP\\Desktop\\productData.txt");
                             break;
                         case 6:
-                            manager.readFile();
+                            manager.readFile("C:\\Users\\HP\\Desktop\\productData.txt");
                             break;
                         case 7:
                             manager.changeItemCount();
@@ -76,6 +80,7 @@ public class ConsoleApplication {
         System.out.println("3:List of products");
         System.out.println("4:Calculate total cost");
         System.out.println("5:Save in file");
+        System.out.println("6:Read from file");
         System.out.println("9:Exit the menu");
         System.out.print("enter the option number you want to proceed with :");
     }
@@ -138,7 +143,6 @@ public class ConsoleApplication {
                     case 2:
                         System.out.print("Enter the size of " + productName + ": ");
                         String size = scanner.nextLine();
-                        scanner.nextLine();
 
                         System.out.print("Enter the colour of " + productName + ": ");
                         String color = scanner.nextLine();

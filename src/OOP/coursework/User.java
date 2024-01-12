@@ -1,6 +1,12 @@
 package OOP.coursework;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
+    public ArrayList<String> userNameList= new ArrayList<>();
+    public ArrayList<String> passwordList= new ArrayList<>();
+
     private String username;
     private String password;
 
