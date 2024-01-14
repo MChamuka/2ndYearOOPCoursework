@@ -1,5 +1,4 @@
 package OOP.coursework;
-import UI.OOP.coursework.ComboBoxExample;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -12,15 +11,17 @@ public class GUIClassA extends JFrame {
     private static final ShoppingManager manager=new WestminsterShoppingManager();
     public String selectedProductID;
     int comboBoxOption=1;
+    public JPanel lblPanel;
     private ShoppingCart shoppingCart=new ShoppingCart();
     public GUIClassA(WestminsterShoppingManager productDetails) {
         setTitle("Westminster Shopping Centre");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 250);
+        setSize(800, 800);
 
         JPanel p1 = new JPanel(new BorderLayout());
         JPanel p2 = new JPanel(new BorderLayout());
         JPanel p3 = new JPanel(new BorderLayout());
+
+        lblPanel = new JPanel(new GridLayout(13, 2, 10, 10));
 
         JLabel jlblSelect1 = new JLabel("Select Product Category");
         p1.add(jlblSelect1, BorderLayout.WEST);
@@ -33,15 +34,11 @@ public class GUIClassA extends JFrame {
         p2.add(p1, BorderLayout.NORTH);
         p2.add(p3,BorderLayout.SOUTH);
 
-        //opening shopping cart using jbCartWindow button
         jbCartWindow.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // When the button is clicked, open the AnotherGUI
                 GUIClassB anotherGUI = new GUIClassB(shoppingCart);
-                anotherGUI.displayTableRows(anotherGUI.tableModelB,shoppingCart);
 
-                UserGUIClass userGUIClass = new UserGUIClass(shoppingCart);
             }
         });
 
@@ -56,6 +53,8 @@ public class GUIClassA extends JFrame {
         JScrollPane scrollPane = new JScrollPane(jtableProduct);
         jtableProduct.setGridColor(Color.BLACK);
 
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(80,20,20,20));
+
         p1.add(scrollPane, BorderLayout.SOUTH);
 
         JButton addToCart = new JButton("Add to Shopping Cart");
@@ -64,22 +63,40 @@ public class GUIClassA extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                int comboBoxOption=comboBoxListner(jcboProductTypes);
                 displayTableRows(tableModel, productDetails.productList,comboBoxOption);
             }
         });
-        JLabel rowLabel = new JLabel("Select a product row ");
 
-        p3.add(rowLabel, BorderLayout.NORTH);
 
-        selectedRowData(jtableProduct,rowLabel,productDetails.productList,addToCart);
+
+        p3.add(lblPanel, BorderLayout.NORTH);
+
+        selectedRowData(jtableProduct,lblPanel,productDetails.productList,addToCart);
 
         addToCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // When the button is clicked, open the AnotherGUI
+                shoppingCart.addProduct(productDetails.productList,selectedProductID);
+            }
+        });
+        jcboProductTypes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedCategory = jcboProductTypes.getSelectedItem().toString();
 
-               shoppingCart.addProduct(productDetails.productList,selectedProductID);
+                switch (selectedCategory) {
+                    case "All":
+                        comboBoxOption = 1;
+                        break;
+                    case "Electronics":
+                        comboBoxOption = 2;
+                        break;
+                    case "Clothing":
+                        comboBoxOption = 3;
+                        break;
+                }
+
+                displayTableRows(tableModel, productDetails.productList, comboBoxOption);
             }
         });
 
@@ -87,6 +104,7 @@ public class GUIClassA extends JFrame {
         setVisible(true);
     }
     private void displayTableRows(DefaultTableModel tableModel, ArrayList<Product> productList,int comboBoxOption) {
+        tableModel.setRowCount(0);
         for (Product product: productList) {
             if ((product instanceof  Clothing clothing) && (comboBoxOption==1 || comboBoxOption==3) ) {
                 Object[] rowData = {clothing.getProductID(), "Clothing" , clothing.getPrice(), clothing.getProductName() + ", " + clothing.getColor()+" weeks warranty"};
@@ -97,7 +115,7 @@ public class GUIClassA extends JFrame {
             }
         }
     }
-    private void selectedRowData(JTable jtableProduct,JLabel rowLabel,ArrayList<Product> productList,JButton addToCart){
+    private void selectedRowData(JTable jtableProduct, JPanel rowLabel, ArrayList<Product> productList, JButton addToCart){
         jtableProduct.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -108,63 +126,95 @@ public class GUIClassA extends JFrame {
                         // Get data from the selected row
                         Object selectedRowProductID = jtableProduct.getValueAt(selectedRow, 0);
 
-                        String output="label output";
-                        for(Product product:productList){
-                            if (selectedRowProductID==product.getProductID()){
+                        String output = "label output";
+                        for (Product product : productList) {
+                            if (selectedRowProductID == product.getProductID()) {
                                 selectedProductID = selectedRowProductID.toString();
 
 
-                                System.out.println(selectedProductID);
+                                if (product instanceof Clothing clothing) {
+                                    lblPanel.removeAll();
 
-                                if(product instanceof  Clothing clothing){
-                                    output = "Selected Product - Details \n"
-                                            + "Product id : " + clothing.getProductID() + "\n"
-                                            + "Category : Clothing \n"
-                                            + "Name : " + clothing.getProductName() + "\n"
-                                            + "Size : " + clothing.getSize() + "\n"
-                                            + "Colour : " + clothing.getColor() + "\n"
-                                            + "Items available : " + clothing.getAvailableItemCount();
+                                    JLabel label01=new JLabel("Selected product - ");
+                                    JLabel label02=new JLabel("Details");
+                                    JLabel label1 = new JLabel("Product id");
+                                    JLabel label2 = new JLabel(String.valueOf(clothing.getProductID()));
+                                    JLabel label3 = new JLabel("Category");
+                                    JLabel label4 = new JLabel(String.valueOf("Clothing"));
+                                    JLabel label5 = new JLabel("Name");
+                                    JLabel label6 = new JLabel(String.valueOf(clothing.getProductName()));
+                                    JLabel label7 = new JLabel("Size");
+                                    JLabel label8 = new JLabel(String.valueOf(clothing.getSize()));
+                                    JLabel label9 = new JLabel("Colour");
+                                    JLabel label10 = new JLabel(String.valueOf(clothing.getColor()));
+                                    JLabel label11 = new JLabel("Items available");
+                                    JLabel label12 = new JLabel(String.valueOf(clothing.getAvailableItemCount()));
+
+                                    lblPanel.add(label01);
+                                    lblPanel.add(label02);
+                                    lblPanel.add(label1);
+                                    lblPanel.add(label2);
+                                    lblPanel.add(label3);
+                                    lblPanel.add(label4);
+                                    lblPanel.add(label5);
+                                    lblPanel.add(label6);
+                                    lblPanel.add(label7);
+                                    lblPanel.add(label8);
+                                    lblPanel.add(label9);
+                                    lblPanel.add(label10);
+                                    lblPanel.add(label11);
+                                    lblPanel.add(label12);
+
+                                    lblPanel.revalidate();
+                                    lblPanel.repaint();
+
+
                                     break;
-                                }
-                                else if(product instanceof Electronics electronics){
-                                    output = "Selected Product - Details \n"
-                                            + "Product id : " + electronics.getProductID() + "\n"
-                                            + "Category : Clothing \n"
-                                            + "Name : " + electronics.getProductName() + "\n"
-                                            + "Size : " + electronics.getBrand() + "\n"
-                                            + "Colour : " + electronics.getWarrantyPeriod() + "\n"
-                                            + "Items available : " + electronics.getAvailableItemCount();
+
+                                } else if (product instanceof Electronics electronics) {
+                                    lblPanel.removeAll();
+
+                                    JLabel label01=new JLabel("Selected product - ");
+                                    JLabel label02=new JLabel("Details");
+                                    JLabel label1 = new JLabel("Product id");
+                                    JLabel label2 = new JLabel(String.valueOf(electronics.getProductID()));
+                                    JLabel label3 = new JLabel("Category");
+                                    JLabel label4 = new JLabel(String.valueOf("Electronics"));
+                                    JLabel label5 = new JLabel("Name");
+                                    JLabel label6 = new JLabel(String.valueOf(electronics.getProductName()));
+                                    JLabel label7 = new JLabel("Brand");
+                                    JLabel label8 = new JLabel(String.valueOf(electronics.getBrand()));
+                                    JLabel label9 = new JLabel("Warranty");
+                                    JLabel label10 = new JLabel(String.valueOf(electronics.getAvailableItemCount()));
+                                    JLabel label11 = new JLabel("Items available");
+                                    JLabel label12 = new JLabel(String.valueOf(electronics.getAvailableItemCount()));
+
+                                    lblPanel.add(label01);
+                                    lblPanel.add(label02);
+                                    lblPanel.add(label1);
+                                    lblPanel.add(label2);
+                                    lblPanel.add(label3);
+                                    lblPanel.add(label4);
+                                    lblPanel.add(label5);
+                                    lblPanel.add(label6);
+                                    lblPanel.add(label7);
+                                    lblPanel.add(label8);
+                                    lblPanel.add(label9);
+                                    lblPanel.add(label10);
+                                    lblPanel.add(label11);
+                                    lblPanel.add(label12);
+
+                                    lblPanel.revalidate();
+                                    lblPanel.repaint();
                                     break;
                                 }
                             }
                         }
-                        // Display output on the JLabel
-                        rowLabel.setText(output);
                     }
                 }
 
             }
         });
     }
-    public int comboBoxListner(JComboBox<String> jcboProductTypes){
-        jcboProductTypes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Get the selected item
-                String selectedValue = jcboProductTypes.getSelectedItem().toString();
-
-                // Display a message with the selected item
-                JOptionPane.showMessageDialog(GUIClassA.this, "Selected: " + selectedValue);
-
-                if (selectedValue.equals("All")) {
-                    comboBoxOption = 1;
-                } else if (selectedValue.equals("Electronics")) {
-                    comboBoxOption = 2;
-                } else if (selectedValue.equals("Clothing")) {
-                    comboBoxOption = 3;
-                }
-            }
-        });
-        return comboBoxOption;
-    }
 }
+

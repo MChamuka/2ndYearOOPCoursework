@@ -1,60 +1,82 @@
 package OOP.coursework;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+
 
 public class UserGUIClass extends JFrame {
+    private String username;
+    private String password;
+    private boolean elementAvailable;
+    private int elementAvailableIndex;
+    private User user=new User(username,password);
+    static final ShoppingManager manager=new WestminsterShoppingManager();
+    ConsoleApplication consoleApplication=new ConsoleApplication();
+    public int discount;
+    public static boolean nonRegisteredUser;
     public UserGUIClass(ShoppingCart shoppingCart) {
 
-        // Create the main frame
+        ShoppingManager manager= consoleApplication.manager;
+
         JFrame frame = new JFrame("TextField Example");
         frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Create a panel to hold the components
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        // Create a JLabel for text field
         JLabel userLabel = new JLabel("Username:");
         panel.add(userLabel);
 
-        // Create a JTextField with 10 columns
         JTextField userTextField = new JTextField();
-        userTextField.setColumns(10); // Set the size
         panel.add(userTextField);
 
-        // Create a JLabel for password field
         JLabel passwordLabel = new JLabel("Password:");
         panel.add(passwordLabel);
 
-        // Create a JPasswordField with 10 columns
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setColumns(10); // Set the size
         panel.add(passwordField);
 
-        // Create a JButton
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add your login logic here
-                String username = userTextField.getText();
-                char[] password = passwordField.getPassword();
-                // Perform authentication or other actions as needed
-                // For simplicity, let's just print the entered values
-                System.out.println("Username: " + username);
-                System.out.println("Password: " + new String(password));
+                new GUIClassA((WestminsterShoppingManager) manager);
+                username = userTextField.getText();
+                password = Arrays.toString(passwordField.getPassword());
+                User user=new User(username,password);
+                userAccountFinder();
             }
         });
         panel.add(loginButton);
-
-        // Add the panel to the frame
         frame.add(panel);
-
-        // Make the frame visible
         frame.setVisible(true);
+    }
+    public void userAccountFinder(){
+        elementAvailable=false;
+        for (int i=0;i<user.userNameList.size();i++) {
+            if (username.equals(user.userNameList.get(i))) {
+                elementAvailableIndex=i;
+                elementAvailable=true;
+            }
+        }
+        if(elementAvailable) {
+            if (password.equals(user.passwordList.get(elementAvailableIndex))) {
+                JOptionPane.showMessageDialog(UserGUIClass.this, "Hello " + username + ", welcome back");
+                nonRegisteredUser = false;
+            } else {
+                JOptionPane.showMessageDialog(UserGUIClass.this, "Incorrect password");
+                nonRegisteredUser = false;
+            }
+
+        }
+        else {
+            user.userNameList.add(this.username);
+            user.passwordList.add(this.password);
+            JOptionPane.showMessageDialog(UserGUIClass.this, "Welcome new User!");
+            nonRegisteredUser = true;
+        }
     }
 }
