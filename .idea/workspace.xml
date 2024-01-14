@@ -67,6 +67,7 @@
       <recent name="OOP.coursework" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="JUnit.WestminsterShoppingManagerTest.testReadFile">
     <configuration name="WestminsterShoppingManagerTest.testAddNewProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OOP_Coursework" />
@@ -158,6 +159,8 @@
       </list>
     </recent_temporary>
   </component>
+=======
+>>>>>>> 40a18db281a59f25fe4b3d0ce5f535629ec640e8
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

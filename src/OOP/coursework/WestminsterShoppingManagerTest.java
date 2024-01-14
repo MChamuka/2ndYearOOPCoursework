@@ -47,4 +47,5 @@ public class WestminsterShoppingManagerTest {
         WestminsterShoppingManager westminsterShoppingManager = new WestminsterShoppingManager();
         westminsterShoppingManager.readFile("test.txt");
     }
+
 }
