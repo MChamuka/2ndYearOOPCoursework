@@ -1,7 +1,8 @@
 package OOP.coursework;
 
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class User {
     public ArrayList<String> userNameList= new ArrayList<>();
@@ -13,8 +14,13 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
 
+        userNameList.add(username);
+        passwordList.add(password);
+
+        System.out.println(username);
+
+    }
     public String getUsername() {
         return username;
     }
@@ -30,7 +36,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
     @Override
     public String toString() {
         return "User{" +
@@ -38,4 +43,5 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

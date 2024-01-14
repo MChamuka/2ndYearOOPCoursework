@@ -12,13 +12,12 @@ public class ShoppingCart {
     public void addProduct(ArrayList<Product> productList,String selectedProductID) {
         for(Product product: productList){
             if(selectedProductID.equals(product.getProductID())){
+                product.setAvailableItemCount(product.getAvailableItemCount()-1);
                 products.add(product);
-                System.out.println(products);
+                break;
             }
             else{
-                System.out.println("nothing added");
             }
-            this.products.add(product);
         }
     }
     public void removeProduct(Product product) {

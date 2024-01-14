@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class ConsoleApplication {
-    private static final ShoppingManager manager=new WestminsterShoppingManager();
+    public static final ShoppingManager manager=new WestminsterShoppingManager();
 
     public static void main(String[] args) {
         while (true) {
@@ -16,10 +16,11 @@ public class ConsoleApplication {
                 scanner.nextLine();
 
                 if (operatorType == 1) {
-                    new GUIClassA((WestminsterShoppingManager) manager);
+                    ShoppingCart shoppingCart=new ShoppingCart();
+                    UserGUIClass userGUIClass = new UserGUIClass(shoppingCart);
                     continue;
-
-                } else if (operatorType == 2) {
+                }
+                else if (operatorType == 2) {
                     System.out.print("enter the password: ");
                     String password = scanner.nextLine();
                     if (password.equals("manager123")) {
@@ -29,6 +30,7 @@ public class ConsoleApplication {
                     continue;
                 }
                 break;
+
             }catch (Exception e){
                     System.out.println("Invalid input, try again");
                 }
@@ -63,6 +65,8 @@ public class ConsoleApplication {
                         case 7:
                             manager.changeItemCount();
                             break;
+                        case 9:
+                            System.out.println("going back");
                         default:
                             System.out.println("Invalid option No.");
                     }
